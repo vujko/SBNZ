@@ -1,0 +1,18 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.facts.Game;
+import sbnz.integracija.example.facts.Tag;
+import sbnz.integracija.example.facts.Tag.TagType;
+
+rule "Genre rules"
+	salience 10
+	lock-on-active true
+		when 
+			$g: Game($tags: getTags())
+			Tag(getType() == TagType.GENRE, getName() == "fps") from $tags
+		then 
+			modify($g){increaseScore(10);}
+			
+end
+	
+

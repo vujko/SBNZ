@@ -1,0 +1,7 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.facts.Game;
+
+query "Get games"
+	$g: Game()
+end

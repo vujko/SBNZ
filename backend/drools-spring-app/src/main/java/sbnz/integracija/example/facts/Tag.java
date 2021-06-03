@@ -14,8 +14,10 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Entity
 @Table(name = "tag")
@@ -34,7 +36,7 @@ public class Tag {
 	private String name;
 
 	public enum TagType {
-		GENRE, THEME, PLAYER_SUPPORT, SPECIAL_SECTION
+		GENRE, THEME, PLAYER_SUPPORT, SPECIAL_SECTION, PLATFORM
 	}
 	
 }

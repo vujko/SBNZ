@@ -10,12 +10,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Entity
@@ -27,14 +30,20 @@ public class Game {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 	
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "developer")
+	private String developer;
+	
+	@Column(name = "publisher")
+	private String publisher;
+	
 	@OneToMany(mappedBy="game", fetch = FetchType.LAZY)
     private Set<Rating> ratings;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
     private Set<Tag> tags;
-	
-	@Column(name = "platform")
-	private String platform;
 	
 	@Column(name = "price")
 	private float price;
@@ -50,5 +59,10 @@ public class Game {
 	
 	@Column(name = "raters_num")
 	private int numOfRaters;
-
+	
+	private int score;
+	
+	public void increaseScore(int bonus) {
+		this.score += bonus;
+	}
 }
