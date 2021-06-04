@@ -5,4 +5,16 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Drools Spring kjar</name>
   <packaging>jar</packaging>
+  
+  <dependencies>
+  	<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.13.2</version>
+		    <scope>test</scope>
+		</dependency>
+
+  </dependencies>
+  
 </project>
