@@ -5,6 +5,7 @@ import sbnz.integracija.example.facts.Tag;
 import sbnz.integracija.example.facts.Tag.TagType;
 
 
+
 rule "Price rule"
 	salience 20
 	lock-on-active true
