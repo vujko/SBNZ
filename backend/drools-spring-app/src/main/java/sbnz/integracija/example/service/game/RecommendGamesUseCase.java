@@ -2,10 +2,11 @@ package sbnz.integracija.example.service.game;
 
 import java.util.List;
 
+import sbnz.integracija.example.dto.RecommendDto;
 import sbnz.integracija.example.facts.Game;
 
 public interface RecommendGamesUseCase {
 	
-	public List<Game> recommendGames();
+	public List<Game> recommendGames(RecommendDto dto);
 
 }

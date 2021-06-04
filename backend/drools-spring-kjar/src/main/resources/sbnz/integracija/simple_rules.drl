@@ -4,15 +4,104 @@ import sbnz.integracija.example.facts.Game;
 import sbnz.integracija.example.facts.Tag;
 import sbnz.integracija.example.facts.Tag.TagType;
 
-rule "Genre rules"
+
+rule "Price rule"
+	salience 20
+	lock-on-active true
+		when 
+			$g: Game(getPrice() < userInput.lowerPrice || getPrice() > userInput.higherPrice)
+		then
+			System.out.println("Price rule with game: " + $g.getName());
+			delete($g);
+			
+end
+
+rule "Genre rule"
 	salience 10
 	lock-on-active true
 		when 
 			$g: Game($tags: getTags())
-			Tag(getType() == TagType.GENRE, getName() == "fps") from $tags
-		then 
+			Tag(getType() == TagType.GENRE, getName() == userInput.genre) from $tags
+		then
+			System.out.println("Genre rule with game: " + $g.getName());
 			modify($g){increaseScore(10);}
 			
 end
+
+rule "Theme rule"
+	salience 10
+	lock-on-active true
+		when 
+			$g: Game($tags: getTags())
+			Tag(getType() == TagType.THEME, getName() == userInput.theme) from $tags
+		then
+			System.out.println("Theme rule with game: " + $g.getName());
+			modify($g){increaseScore(10);}
+			
+end
+
+rule "Special Section rule"
+	salience 10
+	lock-on-active true
+		when 
+			$g: Game($tags: getTags())
+			Tag(getType() == TagType.SPECIAL_SECTION, getName() == userInput.specialSection) from $tags
+		then
+			System.out.println("Special Section rule with game: " + $g.getName());
+			modify($g){increaseScore(10);}
+			
+end
+
+rule "Platform rule"
+	salience 10
+	lock-on-active true
+		when 
+			$g: Game($tags: getTags())
+			Tag(getType() == TagType.PLATFORM, getName() == userInput.platform) from $tags
+		then 
+			System.out.println("Platform rule with game: " + $g.getName());
+			modify($g){increaseScore(10);}
+			
+end
+
+rule "Player Support rule"
+	salience 10
+	lock-on-active true
+		when 
+			$g: Game($tags: getTags())
+			Tag(getType() == TagType.PLAYER_SUPPORT, getName() == userInput.playerSupport) from $tags
+		then
+			System.out.println("Player Support rule with game: " + $g.getName());
+			modify($g){increaseScore(10);}
+			
+end
+
+rule "Popularity rule"
+	salience 20
+	lock-on-active true
+		when 
+			$g: Game(getNumOfDownloads() > 100)
+		then
+			System.out.println("Popularity rule with game: " + $g.getName());
+			modify($g){increaseScore(10);}
+			
+end
+
+rule "High Rated rule"
+	salience 20
+	lock-on-active true
+		when 
+			$g: Game(getAverageRating() > 4)
+		then 
+			System.out.println("High Rated rule with game: " + $g.getName());
+			modify($g){increaseScore(10);}
+			
+end
+
+
+
+
+
+
 	
 

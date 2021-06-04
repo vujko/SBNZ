@@ -1,0 +1,5 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.dto.RecommendDto;
+
+global RecommendDto userInput;
