@@ -6,13 +6,13 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
 @Entity
 @Table(name = "registered_user")
@@ -24,6 +24,19 @@ public class RegisteredUser extends User {
 	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private Set<Rating> ratings;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
     private Set<Tag> tags;
+
+	public RegisteredUser() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public RegisteredUser(Long id, String email, String password, String firstName, String lastName,
+			Set<Authority> authorities) {
+		super(id, email, password, firstName, lastName, authorities);
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 }
