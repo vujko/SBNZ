@@ -87,7 +87,7 @@ rule "Player Support rule"
 end
 
 rule "Popularity rule"
-	salience 20
+	salience 10
 	lock-on-active true
 		when 
 			$g: Game(getNumOfDownloads() > 100)
@@ -98,13 +98,14 @@ rule "Popularity rule"
 end
 
 rule "High Rated rule"
-	salience 20
+	salience 10
 	lock-on-active true
 		when 
 			$g: Game(getAverageRating() > 4)
 		then 
 			System.out.println("High Rated rule with game: " + $g.getName());
 			modify($g){increaseScore(10);}
+			modify($g){setStatus(Game.GameStatus.HIGH_RATED);}
 			
 end
 

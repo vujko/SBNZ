@@ -27,7 +27,7 @@ INSERT INTO tag (type, name) VALUES
 	
 	
 INSERT INTO game (name, developer, publisher, price, image, average_rating, downloads_num, raters_num, score) VALUES
-	('Call Of Duty 2', 'Activision', 'Activision', 20.0, 'image1', 4.5, 1000, 0, 0),
+	('Call Of Duty 2', 'Activision', 'Activision', 20.0, 'image1', 4.5, 10000, 1200, 0),
 	('Counter Strike 1.6', 'Valv Corporation', 'Valv Corporation', 15.0, 'image2', 4.0, 80, 0, 0),
 	('PUBG', 'PUBG Corporation', 'PUBG Corporation', 30.0, 'image3', 0.0, 0, 0, 0),
 	('PUBG New State', 'PUBG Corporation', 'PUBG Corporation', 100.0, 'image4', 0.0, 0, 0, 0);

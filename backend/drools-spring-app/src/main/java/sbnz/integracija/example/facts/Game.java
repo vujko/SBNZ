@@ -63,6 +63,11 @@ public class Game {
 	private int numOfRaters;
 	
 	private int score;
+	private GameStatus status;
+	
+	public enum GameStatus {
+		HIGH_RATED, POPULAR, VALID_RATE,  VLAID_HIGH_RATE, EPIC_GAME, NA
+	}
 	
 	public void increaseScore(int bonus) {
 		this.score += bonus;
