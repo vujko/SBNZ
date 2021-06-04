@@ -4,14 +4,24 @@ import sbnz.integracija.example.facts.Game;
 import sbnz.integracija.example.facts.Tag;
 import sbnz.integracija.example.facts.Tag.TagType;
 
-
-rule "Price rule"
+rule "Under price range rule"
 	salience 20
 	lock-on-active true
 		when 
-			$g: Game(getPrice() < userInput.lowerPrice || getPrice() > userInput.higherPrice)
+			$g: Game(getPrice() < userInput.lowerPrice)
 		then
-			System.out.println("Price rule with game: " + $g.getName());
+			System.out.println("Under price range rule with game: " + $g.getName());
+			delete($g);
+			
+end
+
+rule "Above price range rule"
+	salience 20
+	lock-on-active true
+		when 
+			$g: Game(getPrice() > userInput.higherPrice)
+		then
+			System.out.println("Above price range rule with game: " + $g.getName());
 			delete($g);
 			
 end
@@ -98,8 +108,17 @@ rule "High Rated rule"
 			
 end
 
-
-
+rule "User status rule"
+	salience 10
+	lock-on-active true
+		when 
+			$g: Game($tags: getTags())
+			Tag(this memberOf tempUser.tags) from $tags
+		then
+			System.out.println("User status rule with game: " + $g.getName());
+			modify($g){increaseScore(10);}
+			
+end
 
 
 
