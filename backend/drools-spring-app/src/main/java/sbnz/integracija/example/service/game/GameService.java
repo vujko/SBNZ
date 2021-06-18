@@ -16,6 +16,8 @@ import sbnz.integracija.example.facts.RegisteredUser;
 import sbnz.integracija.example.repository.GameRepository;
 import sbnz.integracija.example.repository.RegistratedUserRepository;
 import sbnz.integracija.example.security.api.AuthenticationService;
+import sbnz.integracija.example.service.knowledge.KnowledgeService;
+
 
 @Service
 @RequiredArgsConstructor
@@ -25,11 +27,10 @@ public class GameService implements RecommendGamesUseCase {
 	private final GameRepository gameRepostiory;
 	private final KieContainer kieContainer;
 	private final AuthenticationService authenticationService;
-
+	private final KnowledgeService knowledgeService;
 	@Override
 	public List<Game> recommendGames(RecommendDto dto) {
 		
-		KieSession kieSession = kieContainer.newKieSession();
 		
 		// Get resoures that we need
 		List<Game> games = gameRepostiory.findAll();
@@ -44,30 +45,30 @@ public class GameService implements RecommendGamesUseCase {
 		}
 	
 		//Set up session
-		kieSession.setGlobal("userInput", dto);
+		knowledgeService.getRulesSession().setGlobal("userInput", dto);
 		
 		for (Game game : games) {
-			kieSession.insert(game);
+			knowledgeService.getRulesSession().insert(game);
 		}
 		
-		kieSession.setGlobal("tempUser", tempUser);
+		knowledgeService.getRulesSession().setGlobal("tempUser", tempUser);
 		
 		for(int i = 1; i < users.size(); i++) {
-			kieSession.insert(users.get(i));
+			knowledgeService.getRulesSession().insert(users.get(i));
 		}
 
 		//Fire rules
-		kieSession.fireAllRules();
+		knowledgeService.getRulesSession().fireAllRules();
 		
 		//Return result
 		List<Game> recommendList = new ArrayList<Game>();
 		
-		QueryResults results = kieSession.getQueryResults("Get games");
+		QueryResults results = knowledgeService.getRulesSession().getQueryResults("Get games");
 		for(QueryResultsRow r: results) {
 			recommendList.add((Game) r.get("$g"));
 		}
 		
-		kieSession.dispose();
+		knowledgeService.disposeRulesSession();
 		
 		return recommendList;
 	}
