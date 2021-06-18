@@ -15,6 +15,7 @@ import sbnz.integracija.example.facts.Game;
 import sbnz.integracija.example.facts.RegisteredUser;
 import sbnz.integracija.example.repository.GameRepository;
 import sbnz.integracija.example.repository.RegistratedUserRepository;
+import sbnz.integracija.example.security.api.AuthenticationService;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ public class GameService implements RecommendGamesUseCase {
 	private final RegistratedUserRepository registratedUserRepository;
 	private final GameRepository gameRepostiory;
 	private final KieContainer kieContainer;
+	private final AuthenticationService authenticationService;
 
 	@Override
 	public List<Game> recommendGames(RecommendDto dto) {
@@ -32,7 +34,14 @@ public class GameService implements RecommendGamesUseCase {
 		// Get resoures that we need
 		List<Game> games = gameRepostiory.findAll();
 		List<RegisteredUser> users = registratedUserRepository.findAll();	
-		RegisteredUser tempUser = users.get(0);
+		RegisteredUser tempUser = (RegisteredUser) this.authenticationService.getAuthenticated();
+		
+		for(int i = 0; i < users.size(); i++) {
+			if(users.get(i).getId() == tempUser.getId() ) {
+				users.remove(i);
+				break;
+			}
+		}
 	
 		//Set up session
 		kieSession.setGlobal("userInput", dto);

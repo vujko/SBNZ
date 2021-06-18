@@ -1,8 +1,15 @@
 package sbnz.integracija.example.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.Value;
 
-@Value
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class RecommendDto {
 	
 	String genre;

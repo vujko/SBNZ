@@ -36,7 +36,6 @@ public class SimpleRulesTest {
 		KieContainer kContainer = ks
 				.newKieContainer(ks.newReleaseId("sbnz.integracija", "drools-spring-kjar", "0.0.1-SNAPSHOT"));
         kSession =  kContainer.newKieSession();
-        tag = new Tag(null, TagType.GENRE, "fps");
         game = new Game(null, "Call Of Duty 2", "Activision", "Activision", new HashSet<Rating>(),
         		new HashSet<Tag>(Arrays.asList(tag)), (float)20.0, "image1", (float)0.0, 0, 0, 0, Game.GameStatus.NA);
         userInput = new RecommendDto("fps", 10.0f, 25.0f, "PC", "War", "Multiplayer", "Early access");

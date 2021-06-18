@@ -4,12 +4,12 @@ INSERT INTO authority (name) VALUES
 	('ROLE_USER');
 
 INSERT INTO admin (id, email, password, first_name, last_name) VALUES
-    (101, 'bodroza.joca@gmail.com', '$2y$10$dGD6UM2xBMUPdMVNWhQ.1e4FBJvKPWQSvfkU7lJywcc05U1GrlMwO', 'Jovan', 'Bodroza');
+    (101, 'email@email.com', '$2a$10$9Q8.wc6RCsiAPmNdnxYwwue9aKiVGWlT4U/oKrs3oFpj05Cv2Qt0q', 'Jovan', 'Bodroza');
 	
 INSERT INTO registered_user (id, email, password, first_name, last_name) VALUES
-	(102, 'bodroza.joca1@gmail.com', '$2y$10$dGD6UM2xBMUPdMVNWhQ.1e4FBJvKPWQSvfkU7lJywcc05U1GrlMwO', 'Vukasin', 'Jokic'),
-	(103, 'bodroza.joca2@gmail.com', '$2y$10$dGD6UM2xBMUPdMVNWhQ.1e4FBJvKPWQSvfkU7lJywcc05U1GrlMwO', 'Jovan', 'Jovanovic'),
-	(104, 'bodroza.joca3@gmail.com', '$2y$10$dGD6UM2xBMUPdMVNWhQ.1e4FBJvKPWQSvfkU7lJywcc05U1GrlMwO', 'Nikola', 'Nikolic');
+	(102, 'bodroza.joca1@gmail.com', '$2a$10$9Q8.wc6RCsiAPmNdnxYwwue9aKiVGWlT4U/oKrs3oFpj05Cv2Qt0q', 'Vukasin', 'Jokic'),
+	(103, 'bodroza.joca2@gmail.com', '$2a$10$9Q8.wc6RCsiAPmNdnxYwwue9aKiVGWlT4U/oKrs3oFpj05Cv2Qt0q', 'Jovan', 'Jovanovic'),
+	(104, 'bodroza.joca3@gmail.com', '$2a$10$9Q8.wc6RCsiAPmNdnxYwwue9aKiVGWlT4U/oKrs3oFpj05Cv2Qt0q', 'Nikola', 'Nikolic');
 
 INSERT INTO user_authority (user_id, authority_id) VALUES
     (101,1),
@@ -28,7 +28,7 @@ INSERT INTO tag (type, name) VALUES
 	
 INSERT INTO game (name, developer, publisher, price, image, average_rating, downloads_num, raters_num, score) VALUES
 	('Call Of Duty 2', 'Activision', 'Activision', 20.0, 'image1', 4.5, 10000, 1200, 0),
-	('Counter Strike 1.6', 'Valv Corporation', 'Valv Corporation', 15.0, 'image2', 4.0, 80, 0, 0),
+	('Counter Strike 1.6', 'Valv Corporation', 'Valv Corporation', 0.0, 'image2', 4.0, 80, 0, 0),
 	('PUBG', 'PUBG Corporation', 'PUBG Corporation', 30.0, 'image3', 0.0, 0, 0, 0),
 	('PUBG New State', 'PUBG Corporation', 'PUBG Corporation', 100.0, 'image4', 0.0, 0, 0, 0);
 	
