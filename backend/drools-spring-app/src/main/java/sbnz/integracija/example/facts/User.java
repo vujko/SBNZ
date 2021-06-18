@@ -42,8 +42,6 @@ public abstract class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id")
     )
     private Set<Authority> authorities;
-    
-    boolean isSimilar;
 
     @Override
     public String getUsername() {
@@ -92,10 +90,6 @@ public abstract class User implements UserDetails {
 
 	public void setAuthorities(Set<Authority> authorities) {
 		this.authorities = authorities;
-	}
-
-	public void setSimilar(boolean isSimilar) {
-		this.isSimilar = isSimilar;
 	}
 
 }
