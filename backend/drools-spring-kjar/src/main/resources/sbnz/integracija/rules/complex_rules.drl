@@ -55,7 +55,7 @@ rule "Similar games rule"
 		)
 		eval(($r.getStars() + $avg) / 2 >= 4.0)
 	then
-		System.out.println("User with email" + + $u.getEmail() + " is similar to temp User " );
+		System.out.printf("User with email %s is similar to temp User", $u.getEmail());
 		modify($g){increaseScore(10);}
 		
 end
