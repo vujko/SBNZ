@@ -4,6 +4,8 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import sbnz.integracija.example.facts.Game.GameStatus;
+
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -40,6 +42,8 @@ public abstract class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id")
     )
     private Set<Authority> authorities;
+    
+    boolean isSimilar;
 
     @Override
     public String getUsername() {
@@ -65,5 +69,33 @@ public abstract class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setAuthorities(Set<Authority> authorities) {
+		this.authorities = authorities;
+	}
+
+	public void setSimilar(boolean isSimilar) {
+		this.isSimilar = isSimilar;
+	}
 
 }

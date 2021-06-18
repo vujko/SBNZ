@@ -66,7 +66,7 @@ public class Game {
 	private GameStatus status;
 	
 	public enum GameStatus {
-		HIGH_RATED, POPULAR, VALID_RATE,  VLAID_HIGH_RATE, EPIC_GAME, NA
+		HIGH_RATED, POPULAR,  VLAID_HIGH_RATE, EPIC_GAME, NA
 	}
 	
 	public void increaseScore(int bonus) {

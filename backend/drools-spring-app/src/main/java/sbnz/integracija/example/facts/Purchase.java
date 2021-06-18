@@ -1,6 +1,7 @@
 package sbnz.integracija.example.facts;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,5 +39,5 @@ public class Purchase {
     private Game game;
 	
 	@Column(name = "date")
-	private LocalDate date;
+	private LocalDateTime date;
 }

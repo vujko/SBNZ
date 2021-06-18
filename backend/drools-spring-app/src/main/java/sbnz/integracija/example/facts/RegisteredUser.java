@@ -12,8 +12,10 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "registered_user")
 public class RegisteredUser extends User {
@@ -34,7 +36,7 @@ public class RegisteredUser extends User {
 
 	public RegisteredUser(Long id, String email, String password, String firstName, String lastName,
 			Set<Authority> authorities) {
-		super(id, email, password, firstName, lastName, authorities);
+		super(id, email, password, firstName, lastName, authorities, false);
 		// TODO Auto-generated constructor stub
 	}
 	

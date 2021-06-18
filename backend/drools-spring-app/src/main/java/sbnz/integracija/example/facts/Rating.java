@@ -1,6 +1,7 @@
 package sbnz.integracija.example.facts;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +37,7 @@ public class Rating {
     private Game game;
 	
 	@Column(name = "date")
-	private LocalDate date;
+	private LocalDateTime date;
 	
 	@Column(name = "stars")
 	private int stars;
