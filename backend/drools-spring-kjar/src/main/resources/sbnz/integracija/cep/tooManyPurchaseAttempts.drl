@@ -1,0 +1,22 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.facts.*;
+import java.util.Date;
+
+rule "Too many purchases from the same user in the the last 10 seconds"
+	when 
+		$n: Notification();
+		$pur: PurchaseEvent($email : email)
+		Number(intValue >= 9) from accumulate(
+			$pur2: PurchaseEvent(
+				email == $email,
+				this != $pur
+			) over window:time(10s),
+			count($pur2)
+		)
+	then
+		System.out.println("Suspicious activity from user " + $email);
+		$n.setMessage("Suspicious activity from user " + $email);
+		$n.setDate(new Date());
+		$n.setCode(2);
+end

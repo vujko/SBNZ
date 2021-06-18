@@ -1,0 +1,22 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.facts.*;
+import java.util.Date;
+
+rule "Too many failed logins from the same user in the last 5 seconds"
+	when 
+		$n: Notification();
+		$log: LoginEvent($email : email)
+		Number(intValue >= 4) from accumulate(
+			$otherLog: LoginEvent(
+				email == $email,
+				this != $log
+			) over window:time(5s),
+			count($otherLog)
+		)
+	then
+		System.out.println("Too many failed logins from user " + $email);
+		$n.setMessage("Too many failed logins from user " + $email);
+		$n.setDate(new Date());
+		$n.setCode(1);
+end
