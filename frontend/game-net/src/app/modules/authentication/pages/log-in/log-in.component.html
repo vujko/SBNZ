@@ -1,0 +1,36 @@
+<div class="center">
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <table>
+            <tr>
+                <input 
+                    type="text"
+                    autocomplete="off"
+                    pInputText
+                    formControlName="email"
+                    placeholder="Email"
+                    class="form-control "
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors}">
+            </tr>
+            <tr></tr>
+            <tr>
+                <input 
+                    type="password"
+                    autocomplete="off"
+                    pInputText
+                    formControlName="password"
+                    placeholder="Password"
+                    class="form-control "
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors}">
+            </tr>
+            <tr></tr>
+            <tr>
+                <button 
+                    pButton 
+                    type="submit" 
+                    label="Log In"
+                    [disabled]="invalidFormInputs()">
+                </button>
+            </tr>
+        </table>
+    </form>    
+</div>

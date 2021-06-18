@@ -1,0 +1,160 @@
+<div>
+
+    <!-- top -->
+
+    <div class="top">
+        <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+            <table>
+                <tr>
+                    <td>
+                        <input 
+                            type="text"
+                            autocomplete="off"
+                            pInputText
+                            formControlName="genre"
+                            placeholder="Genre"
+                            class="form-control "
+                            [ngClass]="{ 'is-invalid': submitted && f.genre.errors}">
+                    </td>
+                    <td>
+                        <input 
+                            type="text"
+                            autocomplete="off"
+                            pInputText
+                            formControlName="platform"
+                            placeholder="Platform"
+                            class="form-control "
+                            [ngClass]="{ 'is-invalid': submitted && f.platform.errors}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input 
+                        type="text"
+                        autocomplete="off"
+                        pInputText
+                        formControlName="theme"
+                        placeholder="Theme"
+                        class="form-control "
+                        [ngClass]="{ 'is-invalid': submitted && f.theme.errors}">
+                    </td>
+                    <td>
+                        <input 
+                        type="text"
+                        autocomplete="off"
+                        pInputText
+                        formControlName="playerSupport"
+                        placeholder="Player Support"
+                        class="form-control "
+                        [ngClass]="{ 'is-invalid': submitted && f.playerSupport.errors}">
+                    </td>                    
+                </tr>
+                <tr>          
+                    <td>
+                        <input
+                            type="number"
+                            autocomplete="off"
+                            pInputText
+                            formControlName="lowerPrice"
+                            placeholder="Lower Price ($)"
+                            class="form-control "
+                            [ngClass]="{ 'is-invalid': submitted && f.lowerPrice.errors}">
+                    </td>
+                    <td>
+                        <input
+                            type="number"
+                            autocomplete="off"
+                            pInputText
+                            formControlName="higherPrice"
+                            placeholder="Higher Price ($)"
+                            class="form-control "
+                            [ngClass]="{ 'is-invalid': submitted && f.higherPrice.errors}">
+                    </td>           
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input 
+                        type="text"
+                        autocomplete="off"
+                        pInputText
+                        formControlName="specialSection"
+                        placeholder="Special Section"
+                        class="form-control "
+                        [ngClass]="{ 'is-invalid': submitted && f.specialSection.errors}">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button 
+                            pButton 
+                            type="submit"
+                            class="p-button-warning"
+                            label="Recommend"
+                            [disabled]="invalidFormInputs()">
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </form>    
+    </div>
+
+    <!-- bottom -->
+
+    <div class="bottom">
+        <p-table [value]="games">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Average Rating</th>
+                    <th>Developer</th>
+                    <th>Number Of Downloads</th>
+                    <th>Number of Ratings</th>
+                    <th>Purchase</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-game>
+                <tr>
+                    <td><img [src]="randImage(game)" width="130px" height="130px"></td>
+                    <td>{{game.name}}</td>
+                    <td>
+                        <p style="margin-left: 28%;
+                            font-size: 18px;">
+                            {{game.averageRating}}
+                        </p>
+                        <p-rating 
+                            readonly="true"
+                            [cancel]="false"
+                            [ngModel]="game.averageRating">
+                        </p-rating>
+                    </td>
+                    <td>{{game.developer}}</td>
+                    <td>{{game.numOfDownloads}}</td>
+                    <td>{{game.numOfRaters}}</td>
+                    <td>
+                        <button *ngIf="game.price !== 0"
+                            style="width: 130px;"
+                            pButton 
+                            icon="pi pi-wallet"
+                            label = "Buy: {{game.price}}$"
+                            class="p-button-warning p-button-rounded"
+                            (click)="purchase(game)"
+                        >
+                        </button>
+                        <button *ngIf="game.price === 0"
+                            style="width: 130px;"
+                            pButton 
+                            label="Get Free"
+                            icon="pi pi-download"
+                            class="p-button-primary p-button-rounded"
+                            (click)="purchase(game)"
+                        >
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+
+</div>
