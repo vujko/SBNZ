@@ -35,14 +35,14 @@ rule "Similar user rule"
 			)
 		then
 			System.out.println("User with email %s is similar to temp User " + $u.getEmail());
-			modify($u){setSimilar(true);}	
+			modify($u){setStatus(RegisteredUser.UserRelation.USER_SIMIRAL);}	
 end
 
 rule "Similar games rule"
 	
 	salience 10
 	when
-		$u: RegisteredUser(isSimilar(), $surg: getRatings())
+		$u: RegisteredUser(getStatus() == RegisteredUser.UserRelation.USER_SIMIRAL, $surg: getRatings())
 		accumulate(
 			Purchase($g: getGame()) from tempUser.getPurchases(),
 			$userGames: collectList($g)

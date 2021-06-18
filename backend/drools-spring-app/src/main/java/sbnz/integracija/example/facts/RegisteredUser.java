@@ -33,11 +33,18 @@ public class RegisteredUser extends User {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	private UserRelation status;
+    
+    public enum UserRelation {
+		NA, USER_SIMIRAL,  FORM_SIMILAR
+	}
 
 	public RegisteredUser(Long id, String email, String password, String firstName, String lastName,
 			Set<Authority> authorities) {
-		super(id, email, password, firstName, lastName, authorities, false);
+		super(id, email, password, firstName, lastName, authorities);
 		// TODO Auto-generated constructor stub
+    	this.status = UserRelation.NA;
 	}
 	
 	
