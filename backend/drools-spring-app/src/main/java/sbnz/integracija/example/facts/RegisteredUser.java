@@ -20,10 +20,10 @@ import lombok.Setter;
 @Table(name = "registered_user")
 public class RegisteredUser extends User {
 	
-	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="user", fetch = FetchType.EAGER)
     private Set<Purchase> purchases;
 	
-	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="user", fetch = FetchType.EAGER)
     private Set<Rating> ratings;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -37,7 +37,7 @@ public class RegisteredUser extends User {
 	private UserRelation status;
     
     public enum UserRelation {
-		NA, USER_SIMIRAL,  FORM_SIMILAR
+		NA, USER_SIMILAR,  FORM_SIMILAR
 	}
 
 	public RegisteredUser(Long id, String email, String password, String firstName, String lastName,
