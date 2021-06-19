@@ -17,6 +17,7 @@ export class RecommendFormComponent implements OnInit {
   games: Game[];
   images: String[];
 
+
   constructor(
     private formBuilder: FormBuilder,
     private messageService: MessageService,
@@ -75,6 +76,11 @@ export class RecommendFormComponent implements OnInit {
   }
 
   purchase(game) {
+    this.recommedService.purchase({"gameId": game.id, "userEmail": "bodroza.joca1@gmail.com"}).subscribe(response => {
+      this.messageService.add({ severity: 'success',
+              summary: 'Successful purchase!',
+              detail: `Game ${game.name} successfuly bought!`});
+    })
 
   }
 

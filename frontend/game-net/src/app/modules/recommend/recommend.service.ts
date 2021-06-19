@@ -18,4 +18,9 @@ export class RecommendService {
     const recommendUrl = `${this.url}/recommend`;
     return this.http.post<any>(recommendUrl, request);
   }
+
+  purchase(purchase: any): Observable<any>{
+    const purchaseUrl = `${this.url}/purchase`;
+    return this.http.post<any>(purchaseUrl, purchase);
+  }
 }

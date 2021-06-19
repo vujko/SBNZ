@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import sbnz.integracija.example.facts.LoginEvent;
 import sbnz.integracija.example.facts.Notification;
 import sbnz.integracija.example.facts.User;
+import sbnz.integracija.example.repository.NotificationRepository;
 import sbnz.integracija.example.repository.UserRepository;
 import sbnz.integracija.example.security.api.AuthenticationService;
 import sbnz.integracija.example.security.api.TokenService;
@@ -27,6 +28,7 @@ public class LogInService implements LogInUseCase {
     private final PasswordEncoder encoder;
     private final UserRepository userRepository;
     private final KnowledgeService knowledgeService;
+    private final NotificationRepository notificationRepository;
 
     @Override
     public LoginDTO logIn(LoginCommand command) {
@@ -40,15 +42,15 @@ public class LogInService implements LogInUseCase {
     }
     
     private void checkForSuspiciousActivity(String email) {
-//    	LoginEvent le = new LoginEvent(email);
-//    	Notification n = new Notification();
-//    	knowledgeService.getEventsSession().insert(le);
-//    	knowledgeService.getEventsSession().insert(n);
-//    	knowledgeService.getEventsSession().fireAllRules();
-//    	
-//    	if(n.getStatusCode() == 1) {
-//    		
-//    	}
+    	LoginEvent le = new LoginEvent(email);
+    	Notification n = new Notification();
+    	knowledgeService.getEventsSession().insert(le);
+    	knowledgeService.getEventsSession().insert(n);
+    	knowledgeService.getEventsSession().fireAllRules();
+    	
+    	if(n.getCode() == 1) {
+    		notificationRepository.save(n);
+    	}
     	
     }
 
