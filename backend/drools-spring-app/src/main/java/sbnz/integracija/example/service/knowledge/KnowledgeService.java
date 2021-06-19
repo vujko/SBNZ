@@ -36,7 +36,7 @@ public class KnowledgeService {
     
     public KieSession getReportsSession() {
         if (this.rulesSession == null) {
-    	    rulesSession = kieContainer.newKieSession("rulesSession");
+    	    rulesSession = kieContainer.newKieSession("reportsSession");
         }
         return rulesSession;
     }

@@ -1,0 +1,48 @@
+<div>
+
+    <!-- top -->
+
+    <div class="top">
+        <p class="header">Weekly Profit: {{profit}}</p>
+        <p class="header">Games of the Week:</p>
+    </div>
+
+    <!-- bottom -->
+
+    <div class="bottom">
+        <p-table [value]="games">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Average Rating</th>
+                    <th>Developer</th>
+                    <th>Number Of Downloads</th>
+                    <th>Number of Ratings</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-game>
+                <tr>
+                    <td><img [src]="randImage(game)" width="130px" height="130px"></td>
+                    <td>{{game.name}}</td>
+                    <td>
+                        <p style="margin-left: 28%;
+                            font-size: 18px;">
+                            {{game.averageRating}}
+                        </p>
+                        <p-rating 
+                            readonly="true"
+                            [cancel]="false"
+                            [ngModel]="game.averageRating">
+                        </p-rating>
+                    </td>
+                    <td>{{game.developer}}</td>
+                    <td>{{game.numOfDownloads}}</td>
+                    <td>{{game.numOfRaters}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+
+</div>

@@ -31,6 +31,11 @@ export class MenuBarComponent implements OnInit {
         label:'Notifications',
         icon: 'pi pi-bell',
         routerLink: ['notification/notifications']
+      },
+      {
+        label:'Weekly Report',
+        icon: 'pi pi-list',
+        routerLink: ['report/weekly-report']
       }
     ]
     userItems:MenuItem[] = [
