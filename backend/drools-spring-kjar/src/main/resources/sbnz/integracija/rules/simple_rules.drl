@@ -6,6 +6,7 @@ import sbnz.integracija.example.facts.Tag.TagType;
 
 rule "Under price range rule"
 	salience 20
+	
 	lock-on-active true
 		when 
 			$g: Game(getPrice() < userInput.lowerPrice)
@@ -18,6 +19,7 @@ end
 
 rule "Above price range rule"
 	salience 20
+	
 	lock-on-active true
 		when 
 			$g: Game(getPrice() > userInput.higherPrice)
@@ -29,6 +31,7 @@ end
 
 rule "Genre rule"
 	salience 10
+	
 	lock-on-active true
 		when 
 			$g: Game($tags: getTags())
@@ -41,6 +44,7 @@ end
 
 rule "Theme rule"
 	salience 10
+	
 	lock-on-active true
 		when 
 			$g: Game($tags: getTags())
@@ -53,6 +57,7 @@ end
 
 rule "Special Section rule"
 	salience 10
+	
 	lock-on-active true
 		when 
 			$g: Game($tags: getTags())
@@ -65,6 +70,7 @@ end
 
 rule "Platform rule"
 	salience 10
+	
 	lock-on-active true
 		when 
 			$g: Game($tags: getTags())
@@ -77,6 +83,7 @@ end
 
 rule "Player Support rule"
 	salience 10
+	
 	lock-on-active true
 		when 
 			$g: Game($tags: getTags())
@@ -89,6 +96,7 @@ end
 
 rule "Popularity rule"
 	salience 10
+	
 	lock-on-active true
 		when 
 			$g: Game(getNumOfDownloads() > 100)
@@ -100,6 +108,7 @@ end
 
 rule "High Rated rule"
 	salience 10
+	
 	lock-on-active true
 		when 
 			$g: Game(getAverageRating() > 4)
@@ -112,6 +121,7 @@ end
 
 rule "User status rule"
 	salience 10
+	
 	lock-on-active true
 		when 
 			$g: Game($tags: getTags())

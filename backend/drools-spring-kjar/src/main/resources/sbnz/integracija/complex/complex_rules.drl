@@ -1,9 +1,11 @@
 package sbnz.integracija;
 
-import sbnz.integracija.example.facts.*;
+import sbnz.integracija.example.facts.*
+
 
 rule "Valid high rate rule"
 	salience 10
+	
 		when 
 			$g: Game(status == Game.GameStatus.HIGH_RATED, numOfRaters > 1000)
 		then 
@@ -25,6 +27,7 @@ end
 rule "Similar user rule"
 	lock-on-active
 	salience 10
+	
 		when
 			$u: RegisteredUser($tags: getTags())
 			Number(intValue >= 2) from accumulate(
@@ -39,8 +42,8 @@ rule "Similar user rule"
 end
 
 rule "Similar games rule"
-	
 	salience 10
+	lock-on-active true
 	when
 		$u: RegisteredUser(getStatus() == RegisteredUser.UserRelation.USER_SIMIRAL, $surg: getRatings())
 		accumulate(
@@ -55,7 +58,7 @@ rule "Similar games rule"
 		)
 		eval(($r.getStars() + $avg) / 2 >= 4.0)
 	then
-		System.out.printf("User with email %s is similar to temp User", $u.getEmail());
+		System.out.printf("User with email %s has similar games to temp User ", $u.getEmail());
 		modify($g){increaseScore(10);}
 		
 end

@@ -10,6 +10,7 @@ public class KnowledgeService {
 	private final KieContainer kieContainer;
     private KieSession rulesSession;
     private KieSession eventsSession;
+    private KieSession complexRulesSession;
 
     public KnowledgeService(KieContainer kieContainer) {
         this.kieContainer = kieContainer;
@@ -30,6 +31,18 @@ public class KnowledgeService {
     public void disposeRulesSession(){
         this.rulesSession.dispose();
         this.rulesSession = null;
+    }
+    
+    public KieSession getComplexRulesSession() {
+        if (this.complexRulesSession == null) {
+    	    complexRulesSession = kieContainer.newKieSession("complexRulesSession");
+        }
+        return complexRulesSession;
+    }
+    
+    public void disposeCommplexRulesSession(){
+        this.complexRulesSession.dispose();
+        this.complexRulesSession = null;
     }
     
     public KieSession getEventsSession() {

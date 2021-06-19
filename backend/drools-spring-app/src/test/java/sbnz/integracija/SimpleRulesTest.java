@@ -42,6 +42,7 @@ public class SimpleRulesTest {
         kSession.setGlobal("userInput", userInput);
         tempUser = new RegisteredUser(null, "a@gmail.com", "pass", "first", "las", null);
         kSession.setGlobal("tempUser", tempUser);
+        kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 	}
 	
 	@Test
@@ -50,6 +51,7 @@ public class SimpleRulesTest {
 		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
 		
 		kSession.insert(game);
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -61,7 +63,7 @@ public class SimpleRulesTest {
 		//set price out of range
 		game.setPrice(50);
 		kSession.insert(game);
-		
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -72,7 +74,7 @@ public class SimpleRulesTest {
 		//set price out of range
 		game.setPrice(50);
 		kSession.insert(game);
-		
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -84,6 +86,7 @@ public class SimpleRulesTest {
 		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
 		
 		kSession.insert(game);
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -96,8 +99,9 @@ public class SimpleRulesTest {
 		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
 		
 		kSession.insert(game);
+
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
-		
 		assertEquals(1, num);
 		assertEquals(10, game.getScore());
 	}
@@ -108,6 +112,8 @@ public class SimpleRulesTest {
 		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
 		
 		kSession.insert(game);
+
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -120,6 +126,8 @@ public class SimpleRulesTest {
 		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
 		
 		kSession.insert(game);
+
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -131,6 +139,8 @@ public class SimpleRulesTest {
         game.setNumOfDownloads(101);
 		
 		kSession.insert(game);
+
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -143,6 +153,8 @@ public class SimpleRulesTest {
         game.setAverageRating(5f);
 		
 		kSession.insert(game);
+
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);

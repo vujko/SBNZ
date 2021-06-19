@@ -5,8 +5,13 @@
 	<kbase  name="rules" packages="rules">
 	     <ksession name="rulesSession"/>
 	</kbase>
+	
+	<kbase  name="complex" packages="complex">
+	     <ksession name="complexRulesSession"/>
+	</kbase>
 
 	<kbase name="cep" eventProcessingMode="stream" packages="cep">
         <ksession name="eventsSession"/>
     </kbase>
+    
 </kmodule>
