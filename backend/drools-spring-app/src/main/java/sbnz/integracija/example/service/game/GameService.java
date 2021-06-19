@@ -10,12 +10,16 @@ import org.kie.api.runtime.rule.QueryResultsRow;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import sbnz.integracija.example.dto.PurchaseDto;
 import sbnz.integracija.example.dto.RecommendDto;
 import sbnz.integracija.example.facts.Game;
+import sbnz.integracija.example.facts.Notification;
 import sbnz.integracija.example.facts.Purchase;
+import sbnz.integracija.example.facts.PurchaseEvent;
 import sbnz.integracija.example.facts.Rating;
 import sbnz.integracija.example.facts.RegisteredUser;
 import sbnz.integracija.example.repository.GameRepository;
+import sbnz.integracija.example.repository.NotificationRepository;
 import sbnz.integracija.example.repository.PurchaseRepository;
 import sbnz.integracija.example.repository.RatingRepository;
 import sbnz.integracija.example.repository.RegistratedUserRepository;
@@ -25,7 +29,7 @@ import sbnz.integracija.example.service.knowledge.KnowledgeService;
 
 @Service
 @RequiredArgsConstructor
-public class GameService implements RecommendGamesUseCase {
+public class GameService implements RecommendGamesUseCase, PurchaseGameUseCase {
 	
 	private final RegistratedUserRepository registratedUserRepository;
 	private final GameRepository gameRepostiory;
@@ -34,6 +38,7 @@ public class GameService implements RecommendGamesUseCase {
 	private final KnowledgeService knowledgeService;
 	private final PurchaseRepository purchaseRepository;
 	private final RatingRepository ratingRepository;
+	private final NotificationRepository notificationRepository;
 	
 	
 	@Override
@@ -100,6 +105,18 @@ public class GameService implements RecommendGamesUseCase {
 		knowledgeService.getComplexRulesSession().fireAllRules();
 		
 		return recommendList;
+	}
+	
+	@Override
+	public void purchase(PurchaseDto dto) {
+		PurchaseEvent p = new PurchaseEvent(dto.getUserEmail());
+		Notification n = new Notification();
+		knowledgeService.getEventsSession().insert(n);
+		knowledgeService.getEventsSession().insert(p);
+		knowledgeService.getEventsSession().fireAllRules();
+		if(n.getCode() == 2) {
+			notificationRepository.save(n);
+		}
 	}
 	
 
