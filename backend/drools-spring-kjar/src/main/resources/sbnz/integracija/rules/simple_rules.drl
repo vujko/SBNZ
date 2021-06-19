@@ -122,6 +122,27 @@ rule "User status rule"
 			
 end
 
+rule "Valid high rate rule"
+	salience 10
+		when 
+			$g: Game(status == Game.GameStatus.HIGH_RATED, numOfRaters > 1000)
+		then 
+			System.out.println("Valid High Rated rule with game: " + $g.getName());
+			modify($g){increaseScore(20);}
+			modify($g){setStatus(Game.GameStatus.VLAID_HIGH_RATE);}
+end
+
+rule "Epic game rule"
+	salience 10
+		when 
+			$g: Game(status == Game.GameStatus.VLAID_HIGH_RATE, numOfDownloads > 1000)
+		then 
+			System.out.println("Epic game rule with game: " + $g.getName());
+			modify($g){increaseScore(30);}
+			modify($g){setStatus(Game.GameStatus.EPIC_GAME);}
+end
+
+
 
 
 	
