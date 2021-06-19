@@ -15,6 +15,7 @@ import org.kie.api.runtime.KieSession;
 
 import sbnz.integracija.example.dto.RecommendDto;
 import sbnz.integracija.example.facts.Game;
+import sbnz.integracija.example.facts.Game.GameStatus;
 import sbnz.integracija.example.facts.Rating;
 import sbnz.integracija.example.facts.RegisteredUser;
 import sbnz.integracija.example.facts.Tag;
@@ -41,8 +42,8 @@ public class SimpleRulesTest {
         userInput = new RecommendDto("fps", 10.0f, 25.0f, "PC", "War", "Multiplayer", "Early access");
         kSession.setGlobal("userInput", userInput);
         tempUser = new RegisteredUser(null, "a@gmail.com", "pass", "first", "las", null);
+        
         kSession.setGlobal("tempUser", tempUser);
-        kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 	}
 	
 	@Test
@@ -51,7 +52,6 @@ public class SimpleRulesTest {
 		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
 		
 		kSession.insert(game);
-		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -63,7 +63,6 @@ public class SimpleRulesTest {
 		//set price out of range
 		game.setPrice(50);
 		kSession.insert(game);
-		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -74,7 +73,6 @@ public class SimpleRulesTest {
 		//set price out of range
 		game.setPrice(50);
 		kSession.insert(game);
-		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -86,7 +84,6 @@ public class SimpleRulesTest {
 		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
 		
 		kSession.insert(game);
-		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -100,7 +97,6 @@ public class SimpleRulesTest {
 		
 		kSession.insert(game);
 
-		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		assertEquals(1, num);
 		assertEquals(10, game.getScore());
@@ -113,7 +109,6 @@ public class SimpleRulesTest {
 		
 		kSession.insert(game);
 
-		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -127,7 +122,6 @@ public class SimpleRulesTest {
 		
 		kSession.insert(game);
 
-		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -140,7 +134,6 @@ public class SimpleRulesTest {
 		
 		kSession.insert(game);
 
-		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
@@ -154,11 +147,46 @@ public class SimpleRulesTest {
 		
 		kSession.insert(game);
 
-		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
 		assertEquals(10, game.getScore());
+	}
+	
+	@Test
+	public void testUserStatus() {
+		tag = new Tag(null, TagType.THEME, "test");
+		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
+		tempUser.setTags(new HashSet<Tag>(Arrays.asList(tag)));
+		kSession.insert(game);
+		int num = kSession.fireAllRules();
+		
+		assertEquals(1, num);
+		assertEquals(10, game.getScore());
+	}
+	
+	@Test
+	public void testValidHighRateRule() {
+		game.setStatus(GameStatus.HIGH_RATED);
+		game.setNumOfRaters(1001);
+		kSession.insert(game);
+		int num = kSession.fireAllRules();
+		
+		assertEquals(1, num);
+		assertEquals(20, game.getScore());
+		assertEquals(GameStatus.VLAID_HIGH_RATE, game.getStatus());
+	}
+	
+	@Test
+	public void testEpicGameRule() {
+		game.setStatus(GameStatus.VLAID_HIGH_RATE);
+		game.setNumOfDownloads(1001);
+		kSession.insert(game);
+		int num = kSession.fireAllRules();
+		
+		assertEquals(2, num);
+		assertEquals(40, game.getScore());
+		assertEquals(GameStatus.EPIC_GAME, game.getStatus());
 	}
 
 }
