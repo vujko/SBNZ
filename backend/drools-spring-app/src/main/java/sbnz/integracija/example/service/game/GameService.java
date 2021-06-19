@@ -56,23 +56,28 @@ public class GameService implements RecommendGamesUseCase {
 	
 		//Set up session
 		knowledgeService.getRulesSession().setGlobal("userInput", dto);
+		knowledgeService.getComplexRulesSession().setGlobal("userInput", dto);
 		
 		for (Game game : games) {
 			knowledgeService.getRulesSession().insert(game);
 		}
 		
 		knowledgeService.getRulesSession().setGlobal("tempUser", tempUser);
+		knowledgeService.getComplexRulesSession().setGlobal("tempUser", tempUser);
 		
 		for(int i = 1; i < users.size(); i++) {
 			knowledgeService.getRulesSession().insert(users.get(i));
+			knowledgeService.getComplexRulesSession().insert(users.get(i));
 		}
 		
 		for(int i = 1; i < purchases.size(); i++) {
 			knowledgeService.getRulesSession().insert(purchases.get(i));
+			knowledgeService.getComplexRulesSession().insert(purchases.get(i));
 		}
 		
 		for(int i = 1; i < ratings.size(); i++) {
 			knowledgeService.getRulesSession().insert(ratings.get(i));
+			knowledgeService.getComplexRulesSession().insert(ratings.get(i));
 		}
 
 		//Fire rules
@@ -87,6 +92,12 @@ public class GameService implements RecommendGamesUseCase {
 		}
 		
 		knowledgeService.disposeRulesSession();
+		
+		for(Game g : recommendList) {
+			knowledgeService.getComplexRulesSession().insert(g);
+		}
+		
+		knowledgeService.getComplexRulesSession().fireAllRules();
 		
 		return recommendList;
 	}

@@ -41,7 +41,7 @@ public class Game {
 	@Column(name = "publisher")
 	private String publisher;
 	
-	@OneToMany(mappedBy="game", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="game", fetch = FetchType.EAGER)
     private Set<Rating> ratings;
 	
 	@ManyToMany(fetch = FetchType.EAGER)

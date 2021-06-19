@@ -49,7 +49,15 @@ export class RecommendFormComponent implements OnInit {
       return;
     }
 
-    var request = this.addForm.getRawValue();
+    var request = {
+      genre: (this.f.genre.value === null) ? '':this.f.genre.value,
+      lowerPrice:  (this.f.lowerPrice.value === null) ? 0:this.f.lowerPrice.value,
+      higherPrice: (this.f.higherPrice.value === null) ? 0:this.f.higherPrice.value,
+      platform: (this.f.platform.value === null) ? '':this.f.platform.value,
+      theme: (this.f.theme.value === null) ? '':this.f.theme.value,
+      playerSupport: (this.f.playerSupport.value === null) ? '':this.f.playerSupport.value,
+      specialSection: (this.f.specialSection.value === null) ? '':this.f.specialSection.value,
+    }
     this.recommedService.recommend(request)
     .subscribe(response => {
       this.games = response;
