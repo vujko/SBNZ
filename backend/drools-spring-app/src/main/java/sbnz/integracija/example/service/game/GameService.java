@@ -76,6 +76,8 @@ public class GameService implements RecommendGamesUseCase {
 		}
 
 		//Fire rules
+		knowledgeService.getRulesSession().getAgenda().getActivationGroup("complex rules");
+		knowledgeService.getRulesSession().getAgenda().getActivationGroup("simple rules");
 		knowledgeService.getRulesSession().fireAllRules();
 		
 		//Return result

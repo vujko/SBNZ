@@ -5,7 +5,6 @@ import sbnz.integracija.example.facts.*
 
 rule "Valid high rate rule"
 	salience 10
-	
 		when 
 			$g: Game(status == Game.GameStatus.HIGH_RATED, numOfRaters > 1000)
 		then 
@@ -25,9 +24,8 @@ rule "Epic game rule"
 end
 
 rule "Similar user rule"
-	lock-on-active
+	lock-on-active true
 	salience 10
-	
 		when
 			$u: RegisteredUser($tags: getTags())
 			Number(intValue >= 2) from accumulate(
@@ -38,14 +36,54 @@ rule "Similar user rule"
 			)
 		then
 			System.out.println("User with email %s is similar to temp User " + $u.getEmail());
-			modify($u){setStatus(RegisteredUser.UserRelation.USER_SIMIRAL);}	
+			modify($u){setStatus(RegisteredUser.UserRelation.USER_SIMILAR);}	
 end
 
 rule "Similar games rule"
-	salience 10
 	lock-on-active true
+	salience 10
 	when
-		$u: RegisteredUser(getStatus() == RegisteredUser.UserRelation.USER_SIMIRAL, $surg: getRatings())
+		$u: RegisteredUser(getStatus() == RegisteredUser.UserRelation.USER_SIMILAR, $surg: getRatings())
+		accumulate(
+			Purchase($g: getGame()) from tempUser.getPurchases(),
+			$userGames: collectList($g)
+		)
+		$r: Rating() from $surg
+		$g: Game(this == $r.getGame(), this not memberOf $userGames)
+		accumulate(
+			Rating(getGame() == $g, $s: getStars()),
+			$avg: average($s)
+		)
+		eval(($r.getStars() + $avg) / 2 >= 4.0)
+	then
+		System.out.printf("User with email %s is similar to temp User", $u.getEmail());
+		modify($g){increaseScore(10);}
+		
+end
+
+
+rule "Similar form rule"
+	lock-on-active true
+	salience 10
+	agenda-group "complex rules"
+		when
+			$u: RegisteredUser($tags: getTags())
+			Number(intValue >= 2) from accumulate(
+				$t:Tag(
+					this memberOf userInput.dtoToTags()
+				) from $tags,
+				count($t)
+			)
+		then
+			System.out.println("User with email %s is similar to user input " + $u.getEmail());
+			modify($u){setStatus(RegisteredUser.UserRelation.FORM_SIMILAR);}	
+end
+
+rule "Similar form-games rule"
+	lock-on-active true
+	salience 10
+	when
+		$u: RegisteredUser(getStatus() == RegisteredUser.UserRelation.FORM_SIMILAR, $surg: getRatings())
 		accumulate(
 			Purchase($g: getGame()) from tempUser.getPurchases(),
 			$userGames: collectList($g)

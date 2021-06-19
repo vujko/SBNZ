@@ -1,0 +1,40 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.facts.*;
+
+import java.time.LocalDateTime;
+
+
+rule "Games of the week"
+	salience 10
+	lock-on-active
+	agenda-group "reports"
+	when 
+		$g: Game()
+		accumulate(
+         	Rating($r: this,  $d: getDate(), $d.isAfter(LocalDateTime.now().minusDays(7)), getGame() == $g, $s: getStars()),
+         	$avgScore: average($s)
+         )
+         accumulate(
+         	Purchase($p: this,  $dp: getDate(), $dp.isAfter(LocalDateTime.now().minusDays(7)), getGame() == $g),
+         	$cntP: count($p)
+         )
+	then
+		modify($g){increaseScore($cntP.intValue() + (int)($avgScore * $avgScore));}
+end
+		
+rule "Weekly profit rule"
+	salience 10
+	lock-on-active
+	agenda-group "reports"
+	when
+		$wp: WeeklyProfitTrigger()
+		accumulate(
+         	Purchase($p: this,  $dp: getDate(), $dp.isAfter(LocalDateTime.now().minusDays(7)), $price: getGame().getPrice()),
+         	$sumP: sum($price)
+         )
+    then
+    	modify($wp){setProfitSum($sumP);}
+end
+    	
+		

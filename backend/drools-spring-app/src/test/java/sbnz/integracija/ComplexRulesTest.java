@@ -61,7 +61,7 @@ public class ComplexRulesTest {
 		int num = kSession.fireAllRules();
 		
 		assertEquals(1, num);
-		assertEquals(UserRelation.USER_SIMIRAL, simUser.getStatus());
+		assertEquals(UserRelation.USER_SIMILAR, simUser.getStatus());
 	}
 	
 	@Test
@@ -88,7 +88,7 @@ public class ComplexRulesTest {
 		int num = kSession.fireAllRules();
 		
 		assertEquals(0, num);
-		assertNotEquals(UserRelation.USER_SIMIRAL, simUser.getStatus());
+		assertNotEquals(UserRelation.USER_SIMILAR, simUser.getStatus());
 	}
 	
 	@Test
@@ -96,7 +96,7 @@ public class ComplexRulesTest {
 		RegisteredUser tempUser = new RegisteredUser(null, "a@gmail.com", "pass", "first", "las", null);
 		RegisteredUser simUser = new RegisteredUser(null, "b@gmail.com", "pass", "first", "las", null);
 		
-		simUser.setStatus(UserRelation.USER_SIMIRAL);
+		simUser.setStatus(UserRelation.USER_SIMILAR);
 		
 		Game game1 = new Game(null, "Call Of Duty 2", "Activision", "Activision", new HashSet<Rating>(),
         		new HashSet<Tag>(), (float)20.0, "image1", (float)0.0, 0, 0, 0, Game.GameStatus.NA);

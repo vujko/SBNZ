@@ -39,4 +39,10 @@ public class Tag {
 		GENRE, THEME, PLAYER_SUPPORT, SPECIAL_SECTION, PLATFORM
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		Tag t = (Tag) obj;
+		return this.type == t.type && this.name.equals(t.name);
+	}
+	
 }
