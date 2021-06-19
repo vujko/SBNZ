@@ -44,5 +44,13 @@ public class Tag {
 		Tag t = (Tag) obj;
 		return this.type == t.type && this.name.equals(t.name);
 	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+	
+	
 	
 }

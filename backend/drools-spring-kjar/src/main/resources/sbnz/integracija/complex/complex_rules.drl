@@ -65,7 +65,6 @@ end
 rule "Similar form rule"
 	lock-on-active true
 	salience 10
-	agenda-group "complex rules"
 		when
 			$u: RegisteredUser($tags: getTags())
 			Number(intValue >= 2) from accumulate(
