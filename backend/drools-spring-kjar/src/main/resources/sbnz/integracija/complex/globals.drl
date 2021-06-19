@@ -1,0 +1,7 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.dto.RecommendDto;
+import sbnz.integracija.example.facts.RegisteredUser;
+
+global RecommendDto userInput;
+global RegisteredUser tempUser;

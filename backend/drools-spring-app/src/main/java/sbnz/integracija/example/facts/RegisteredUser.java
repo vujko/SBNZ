@@ -1,6 +1,7 @@
 package sbnz.integracija.example.facts;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -45,6 +46,28 @@ public class RegisteredUser extends User {
 		super(id, email, password, firstName, lastName, authorities);
 		// TODO Auto-generated constructor stub
     	this.status = UserRelation.NA;
+	}
+
+	public Set<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
+	}
+	
+	public void addRating(Rating rating) {
+		if(ratings == null) {
+			ratings = new HashSet<>();
+		}
+		ratings.add(rating);
+	}
+	
+	public void addPurchase(Purchase purchase) {
+		if(purchases == null) {
+			purchases= new HashSet<>();
+		}
+		purchases.add(purchase);
 	}
 	
 	

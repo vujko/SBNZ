@@ -42,111 +42,123 @@ public class SimpleRulesTest {
         kSession.setGlobal("userInput", userInput);
         tempUser = new RegisteredUser(null, "a@gmail.com", "pass", "first", "las", null);
         kSession.setGlobal("tempUser", tempUser);
+        kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
 	}
 	
-//	@Test
-//	public void testGenreInput() {
-//        tag = new Tag(null, TagType.GENRE, "fps");
-//		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
-//		
-//		kSession.insert(game);
-//		int num = kSession.fireAllRules();
-//		
-//		assertEquals(1, num);
-//		assertEquals(10, game.getScore());
-//	}
-//	
-//	@Test
-//	public void testPriceAboveRangeInput() {
-//		//set price out of range
-//		game.setPrice(50);
-//		kSession.insert(game);
-//		
-//		int num = kSession.fireAllRules();
-//		
-//		assertEquals(1, num);
-//	}
-//	
-//	@Test
-//	public void testPriceBelowRangeInput() {
-//		//set price out of range
-//		game.setPrice(50);
-//		kSession.insert(game);
-//		
-//		int num = kSession.fireAllRules();
-//		
-//		assertEquals(1, num);
-//	}
-//	
-//	@Test
-//	public void testThemeInput() {
-//        tag = new Tag(null, TagType.THEME, "War");
-//		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
-//		
-//		kSession.insert(game);
-//		int num = kSession.fireAllRules();
-//		
-//		assertEquals(1, num);
-//		assertEquals(10, game.getScore());
-//	}
-//	
-//	@Test
-//	public void testSpecialSectionInput() {
-//        tag = new Tag(null, TagType.SPECIAL_SECTION, "Early access");
-//		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
-//		
-//		kSession.insert(game);
-//		int num = kSession.fireAllRules();
-//		
-//		assertEquals(1, num);
-//		assertEquals(10, game.getScore());
-//	}
-//	
-//	@Test
-//	public void testPlatformInput() {
-//        tag = new Tag(null, TagType.PLATFORM, "PC");
-//		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
-//		
-//		kSession.insert(game);
-//		int num = kSession.fireAllRules();
-//		
-//		assertEquals(1, num);
-//		assertEquals(10, game.getScore());
-//	}
-//	
-//	@Test
-//	public void testPlayerSupportInput() {
-//        tag = new Tag(null, TagType.PLAYER_SUPPORT, "Multiplayer");
-//		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
-//		
-//		kSession.insert(game);
-//		int num = kSession.fireAllRules();
-//		
-//		assertEquals(1, num);
-//		assertEquals(10, game.getScore());
-//	}
-//	
-//	@Test
-//	public void testPopularityRule() {
-//        game.setNumOfDownloads(101);
-//		
-//		kSession.insert(game);
-//		int num = kSession.fireAllRules();
-//		
-//		assertEquals(1, num);
-//		assertEquals(10, game.getScore());
-//	}
-//	
-//	
-//	@Test
-//	public void testHighRatedRule() {
-//        game.setAverageRating(5f);
-//		
-//		kSession.insert(game);
-//		int num = kSession.fireAllRules();
-//		
-//		assertEquals(1, num);
-//		assertEquals(10, game.getScore());
-//	}
+	@Test
+	public void testGenreInput() {
+        tag = new Tag(null, TagType.GENRE, "fps");
+		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
+		
+		kSession.insert(game);
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
+		int num = kSession.fireAllRules();
+		
+		assertEquals(1, num);
+		assertEquals(10, game.getScore());
+	}
+	
+	@Test
+	public void testPriceAboveRangeInput() {
+		//set price out of range
+		game.setPrice(50);
+		kSession.insert(game);
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
+		int num = kSession.fireAllRules();
+		
+		assertEquals(1, num);
+	}
+	
+	@Test
+	public void testPriceBelowRangeInput() {
+		//set price out of range
+		game.setPrice(50);
+		kSession.insert(game);
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
+		int num = kSession.fireAllRules();
+		
+		assertEquals(1, num);
+	}
+	
+	@Test
+	public void testThemeInput() {
+        tag = new Tag(null, TagType.THEME, "War");
+		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
+		
+		kSession.insert(game);
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
+		int num = kSession.fireAllRules();
+		
+		assertEquals(1, num);
+		assertEquals(10, game.getScore());
+	}
+	
+	@Test
+	public void testSpecialSectionInput() {
+        tag = new Tag(null, TagType.SPECIAL_SECTION, "Early access");
+		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
+		
+		kSession.insert(game);
+
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
+		int num = kSession.fireAllRules();
+		assertEquals(1, num);
+		assertEquals(10, game.getScore());
+	}
+	
+	@Test
+	public void testPlatformInput() {
+        tag = new Tag(null, TagType.PLATFORM, "PC");
+		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
+		
+		kSession.insert(game);
+
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
+		int num = kSession.fireAllRules();
+		
+		assertEquals(1, num);
+		assertEquals(10, game.getScore());
+	}
+	
+	@Test
+	public void testPlayerSupportInput() {
+        tag = new Tag(null, TagType.PLAYER_SUPPORT, "Multiplayer");
+		game.setTags(new HashSet<Tag>(Arrays.asList(tag)));
+		
+		kSession.insert(game);
+
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
+		int num = kSession.fireAllRules();
+		
+		assertEquals(1, num);
+		assertEquals(10, game.getScore());
+	}
+	
+	@Test
+	public void testPopularityRule() {
+        game.setNumOfDownloads(101);
+		
+		kSession.insert(game);
+
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
+		int num = kSession.fireAllRules();
+		
+		assertEquals(1, num);
+		assertEquals(10, game.getScore());
+	}
+	
+	
+	@Test
+	public void testHighRatedRule() {
+        game.setAverageRating(5f);
+		
+		kSession.insert(game);
+
+		kSession.getAgenda().getAgendaGroup("simple rules").setFocus();
+		int num = kSession.fireAllRules();
+		
+		assertEquals(1, num);
+		assertEquals(10, game.getScore());
+	}
 
 }

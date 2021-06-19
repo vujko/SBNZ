@@ -1,10 +1,10 @@
 package sbnz.integracija;
 
-import sbnz.integracija.example.facts.*;
+import sbnz.integracija.example.facts.*
+
 
 rule "Valid high rate rule"
 	salience 10
-	agenda-group "complex rules"
 		when 
 			$g: Game(status == Game.GameStatus.HIGH_RATED, numOfRaters > 1000)
 		then 
@@ -15,7 +15,6 @@ end
 
 rule "Epic game rule"
 	salience 10
-	agenda-group "complex rules"
 		when 
 			$g: Game(status == Game.GameStatus.VLAID_HIGH_RATE, numOfDownloads > 1000)
 		then 
@@ -27,7 +26,6 @@ end
 rule "Similar user rule"
 	lock-on-active true
 	salience 10
-	agenda-group "complex rules"
 		when
 			$u: RegisteredUser($tags: getTags())
 			Number(intValue >= 2) from accumulate(
@@ -44,7 +42,6 @@ end
 rule "Similar games rule"
 	lock-on-active true
 	salience 10
-	agenda-group "complex rules"
 	when
 		$u: RegisteredUser(getStatus() == RegisteredUser.UserRelation.USER_SIMILAR, $surg: getRatings())
 		accumulate(
@@ -68,7 +65,6 @@ end
 rule "Similar form rule"
 	lock-on-active true
 	salience 10
-	agenda-group "complex rules"
 		when
 			$u: RegisteredUser($tags: getTags())
 			Number(intValue >= 2) from accumulate(
@@ -85,7 +81,6 @@ end
 rule "Similar form-games rule"
 	lock-on-active true
 	salience 10
-	agenda-group "complex rules"
 	when
 		$u: RegisteredUser(getStatus() == RegisteredUser.UserRelation.FORM_SIMILAR, $surg: getRatings())
 		accumulate(
@@ -100,7 +95,7 @@ rule "Similar form-games rule"
 		)
 		eval(($r.getStars() + $avg) / 2 >= 4.0)
 	then
-		System.out.printf("User with email %s is similar to temp User", $u.getEmail());
+		System.out.printf("User with email %s has similar games to temp User ", $u.getEmail());
 		modify($g){increaseScore(10);}
 		
 end
