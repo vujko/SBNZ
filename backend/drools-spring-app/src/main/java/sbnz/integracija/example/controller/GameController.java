@@ -22,7 +22,6 @@ public class GameController {
 
 	@PostMapping(value = "/recommend")
 	public List<Game> test(@RequestBody RecommendDto dto) {
-		System.out.println("bla");
 		return recomender.recommendGames(dto);
 	}
 }
