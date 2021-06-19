@@ -27,6 +27,11 @@ export class MenuBarComponent implements OnInit {
     ];
 
     adminItems:MenuItem[] = [
+      {
+        label:'Notifications',
+        icon: 'pi pi-bell',
+        routerLink: ['notification/notifications']
+      }
     ]
     userItems:MenuItem[] = [
     ]
@@ -43,7 +48,7 @@ export class MenuBarComponent implements OnInit {
               this.items = [
                 ...this.adminItems
               ];
-              this.router.navigate(['certificate/certificate-requests']);
+              this.router.navigate(['notification/notifications']);
             }
             else if(this.checkRole(userInfo, "ROLE_USER")) {
               this.items = [

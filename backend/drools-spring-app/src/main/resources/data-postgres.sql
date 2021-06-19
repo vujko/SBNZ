@@ -65,6 +65,10 @@ INSERT INTO rating (user_id, game_id, date, stars) VALUES
 	(103, 1, '2021-06-03 02:22:29', 4.6),
 	(103, 4, '2021-06-16 20:22:29', 3.8);
 	
+INSERT INTO notification (message, date, code) VALUES
+	('message1', '2021-06-15', 1),
+	('message2', '2021-06-16', 2);
+	
 	
 		
 	

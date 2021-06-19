@@ -17,6 +17,11 @@ const routes: Routes = [
     path: 'recommend',
     loadChildren: () => import('./modules/recommend/recommend.module').then(m => m.RecommendModule)
   },
+
+  {
+    path: 'notification',
+    loadChildren: () => import('./modules/notification/notification.module').then(m => m.NotificationModule)
+  },
 ];
 
 @NgModule({

@@ -10,8 +10,6 @@ import lombok.Setter;
 import lombok.Value;
 import sbnz.integracija.example.facts.*;
 
-@Getter
-@Setter
 public class RecommendDto {
 	
 	String genre;
@@ -75,5 +73,65 @@ public class RecommendDto {
 		
 		return tags;		
 		
+	}
+	
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public void setLowerPrice(float lowerPrice) {
+		this.lowerPrice = lowerPrice;
+	}
+
+	public void setHigherPrice(float higherPrice) {
+		if( higherPrice == 0) {
+			this.higherPrice = (float) Double.POSITIVE_INFINITY;
+		} else {
+			this.higherPrice = higherPrice;
+		}
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public float getLowerPrice() {
+		return lowerPrice;
+	}
+
+	public float getHigherPrice() {
+		return higherPrice;
+	}
+
+	public String getPlatform() {
+		return platform;
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public String getPlayerSupport() {
+		return playerSupport;
+	}
+
+	public String getSpecialSection() {
+		return specialSection;
+	}
+
+	public void setPlatform(String platform) {
+		this.platform = platform;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+
+	public void setPlayerSupport(String playerSupport) {
+		this.playerSupport = playerSupport;
+	}
+
+	public void setSpecialSection(String specialSection) {
+		this.specialSection = specialSection;
 	}
 }
