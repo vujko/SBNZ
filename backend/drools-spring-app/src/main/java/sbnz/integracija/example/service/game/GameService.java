@@ -76,6 +76,10 @@ public class GameService implements RecommendGamesUseCase {
 		}
 
 		//Fire rules
+<<<<<<< HEAD
+=======
+		knowledgeService.getRulesSession().fireAllRules();
+>>>>>>> a94d03a2396872c34417bd6e475d43e9b4852988
 		
 		knowledgeService.getRulesSession().fireAllRules();
 		//Return result
