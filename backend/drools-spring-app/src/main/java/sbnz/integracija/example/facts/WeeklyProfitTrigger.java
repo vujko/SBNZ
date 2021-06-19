@@ -7,7 +7,7 @@ import lombok.Setter;
 
 public class WeeklyProfitTrigger {
 	
-	private Double profitSum;
+	private double profitSum;
 	private Date date;
 	
 	public WeeklyProfitTrigger() {
@@ -17,6 +17,10 @@ public class WeeklyProfitTrigger {
 	
 	public void setProfitSum(Double profitSum) {
 		this.profitSum = profitSum;
+	}
+	
+	public double getProfitSum() {
+		return this.profitSum;
 	}
 
 }
